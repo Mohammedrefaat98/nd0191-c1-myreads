@@ -1,8 +1,12 @@
 import "./App.css";
-import React from "react";
+import React,{ useState } from "react";
 import PropTypes from 'prop-types'
 
-export default function Book({title,authors,url}) {
+export default function Book({id,title,authors,url,onUpdate,shelf}) {
+  const handleChange=(e)=>{
+    onUpdate({id: id},e.target.value)
+  }
+
   return (
     <div className="book">
       <div className="book-top">
@@ -16,7 +20,7 @@ export default function Book({title,authors,url}) {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <select>
+          <select onChange={handleChange} value={shelf}>
             <option value="none" disabled>
               Move to...
             </option>
