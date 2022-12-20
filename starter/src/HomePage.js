@@ -7,6 +7,7 @@ export default function HomePage({ setShowSearchpage }) {
   const [crBooks, setCrBooks] = useState([]);
   const [wrBooks, setWrBooks] = useState([]);
   const [rBooks, setRBooks] = useState([]);
+  
   const getBooks = async () => {
     const res = await BooksAPI.getAll();
     console.log(res);
@@ -15,17 +16,17 @@ export default function HomePage({ setShowSearchpage }) {
     setRBooks(res.filter(book => book.shelf === "read"));
   };
 
-  useEffect(() => {
-    getBooks();
-  }, []);
-
   const onUpdate=(book,shelf)=>{
     const updateBook= async () =>{
       const res= await BooksAPI.update(book,shelf);
       console.log(res);
     }
-    updateBook().then(()=>getBooks());
+    updateBook();
   }
+
+  useEffect(() => {
+    getBooks();
+  });
 
   return (
     <div className="list-books">
