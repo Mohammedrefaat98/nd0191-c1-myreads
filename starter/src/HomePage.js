@@ -21,12 +21,12 @@ export default function HomePage({ setShowSearchpage }) {
       const res= await BooksAPI.update(book,shelf);
       console.log(res);
     }
-    updateBook();
+    updateBook().then(()=>getBooks());
   }
 
   useEffect(() => {
     getBooks();
-  });
+  }, []);
 
   return (
     <div className="list-books">
