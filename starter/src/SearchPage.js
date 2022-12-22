@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect, useRef } from "react";
 import * as BooksAPI from "./BooksAPI"
 import BooksGrid from "./BooksGrid"
+import { Link } from "react-router-dom";
 
 export default function SearchPage({ setShowSearchpage }) {
   const [input, setInput] = useState("");
@@ -29,9 +30,9 @@ export default function SearchPage({ setShowSearchpage }) {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search" onClick={setShowSearchpage}>
+        <Link className="close-search" to="/">
           Close
-        </a>
+        </Link>
         <div className="search-books-input-wrapper">
           <input
             type="text"

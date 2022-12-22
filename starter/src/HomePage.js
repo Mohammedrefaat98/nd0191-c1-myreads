@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 import Shelf from "./Shelf";
+import { Link } from "react-router-dom";
 
 export default function HomePage({ setShowSearchpage }) {
   const [crBooks, setCrBooks] = useState([]);
@@ -41,7 +42,7 @@ export default function HomePage({ setShowSearchpage }) {
         </div>
       </div>
       <div className="open-search">
-        <a onClick={setShowSearchpage}>Add a book</a>
+        <Link to="/search">Add a book</Link>
       </div>
     </div>
   );
