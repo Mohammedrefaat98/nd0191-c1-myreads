@@ -16,8 +16,8 @@ export default function Shelf({ name, booksList, onUpdate }) {
               <Book
                 id={book.id}
                 title={book.title}
-                authors={book.authors}
-                url={book.imageLinks.thumbnail}
+                authors={(!book.authors?[]:book.authors)}
+                url={book?.imageLinks?.thumbnail}
                 onUpdate={handleUpdate}
                 shelf={book.shelf}
               />

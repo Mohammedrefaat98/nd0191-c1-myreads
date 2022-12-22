@@ -1,5 +1,5 @@
 import "./App.css";
-import React,{ useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types'
 
 export default function Book({id,title,authors,url,onUpdate,shelf}) {
@@ -15,8 +15,7 @@ export default function Book({id,title,authors,url,onUpdate,shelf}) {
           style={{
             width: 128,
             height: 193,
-            backgroundImage:
-              `url("${url}")`,
+            backgroundImage: `url("${url}")`,
           }}
         ></div>
         <div className="book-shelf-changer">
