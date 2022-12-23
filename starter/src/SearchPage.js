@@ -4,7 +4,7 @@ import * as BooksAPI from "./BooksAPI"
 import BooksGrid from "./BooksGrid"
 import { Link } from "react-router-dom";
 
-export default function SearchPage({ setShowSearchpage }) {
+export default function SearchPage() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState([]);
   const mounted = useRef();

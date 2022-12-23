@@ -1,10 +1,10 @@
 import "./App.css";
-import { useState } from "react";
 import HomePage from "./HomePage";
 import SearchPage from "./SearchPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotFound from "./NotFound";
+
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
 
   return (
     <BrowserRouter>
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/search" element={<SearchPage/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
     </BrowserRouter>

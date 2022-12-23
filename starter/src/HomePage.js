@@ -4,7 +4,7 @@ import * as BooksAPI from "./BooksAPI";
 import Shelf from "./Shelf";
 import { Link } from "react-router-dom";
 
-export default function HomePage({ setShowSearchpage }) {
+export default function HomePage() {
   const [crBooks, setCrBooks] = useState([]);
   const [wrBooks, setWrBooks] = useState([]);
   const [rBooks, setRBooks] = useState([]);
