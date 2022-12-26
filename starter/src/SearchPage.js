@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect, useRef } from "react";
-import * as BooksAPI from "./BooksAPI"
-import BooksGrid from "./BooksGrid"
+import * as BooksAPI from "./BooksAPI";
+import BooksGrid from "./BooksGrid";
 import { Link } from "react-router-dom";
 
 export default function SearchPage() {
@@ -11,21 +11,26 @@ export default function SearchPage() {
 
   const handleChange = (e) => {
     setInput(e.target.value);
-  };
-
-  useEffect(()=>{
-    const search=async ()=>{
-      const res = await BooksAPI.search(input);
-      (Array.isArray(res) ? setResult(res):setResult([]))
+    if(!e.target.value){
+      setResult([]);
     }
+  };
+  
+  useEffect(() => {
+    const search = async () => {
+      await BooksAPI.search(input)
+        .then(res => (Array.isArray(res) ? setResult(res) : setResult([])))
+        .catch(() => setResult([]));
+    };
     if (!mounted.current) {
-      // do componentDidMount logic
+      setResult([]);
       mounted.current = true;
     } else {
       // do componentDidUpdate logic
-      search()
+      search();
     }
-  },[input])
+    return setResult([]);
+  }, [input]);
 
   return (
     <div className="search-books">
@@ -34,15 +39,18 @@ export default function SearchPage() {
           Close
         </Link>
         <div className="search-books-input-wrapper">
-          <input
-            type="text"
-            placeholder="Search by title, author, or ISBN"
-            onChange={handleChange}
-          />
+          <form>
+            <input
+              type="text"
+              value={input}
+              placeholder="Search by title, author, or ISBN"
+              onChange={handleChange}
+            />
+          </form>
         </div>
       </div>
 
-      <BooksGrid booksList={result}/>
+      <BooksGrid booksList={result} />
     </div>
   );
 }
