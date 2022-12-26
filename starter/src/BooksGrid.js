@@ -20,11 +20,7 @@ export default function BooksGrid({ booksList }) {
           <li key={book.id}>
             <Book
               id={book.id}
-              title={book.title}
-              authors={(!book.authors?[]:book.authors)}
-              url={book?.imageLinks?.thumbnail}
               onUpdate={onUpdate}
-              shelf={"none"}
             />
           </li>
         ))}

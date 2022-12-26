@@ -1,11 +1,20 @@
 import "./App.css";
-import React from "react";
+import React,{useEffect,useState} from "react";
 import PropTypes from 'prop-types'
+import * as BooksAPI from "./BooksAPI";
 
-export default function Book({id,title,authors,url,onUpdate,shelf}) {
-  const handleChange=(e)=>{
-    onUpdate({id: id},e.target.value)
+export default function Book({id,onUpdate}) {
+  const getByID=async ()=>{
+    await BooksAPI.get(id).then(res=>setBook(res));
   }
+  const handleChange=(e)=>{
+    onUpdate({id: id},e.target.value);
+    setBook({...book,shelf: e.target.value});
+  }
+  const [book,setBook]=useState();
+  useEffect(()=>{
+    getByID();
+  },[]);
 
   return (
     <div className="book">
@@ -15,11 +24,11 @@ export default function Book({id,title,authors,url,onUpdate,shelf}) {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url("${url}")`,
+            backgroundImage: `url("${book?.imageLinks?.thumbnail}")`,
           }}
         ></div>
         <div className="book-shelf-changer">
-          <select onChange={handleChange} value={shelf}>
+          <select onChange={handleChange} value={book?.shelf}>
             <option value="none" disabled>
               Move to...
             </option>
@@ -30,8 +39,8 @@ export default function Book({id,title,authors,url,onUpdate,shelf}) {
           </select>
         </div>
       </div>
-      <div className="book-title">{title}</div>
-      <div className="book-authors">{authors.join(', ')}</div>
+      <div className="book-title">{book?.title}</div>
+      <div className="book-authors">{(!book?.authors?[]:book?.authors).join(', ')}</div>
     </div>
   );
 }
