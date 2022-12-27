@@ -4,7 +4,7 @@ This is the starter template for the final assessment project for Udacity's Reac
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) to bootstrap the project.
 
-## TL;DR
+## Setup
 
 To get started developing right away:
 
@@ -24,6 +24,12 @@ To get started developing right away:
 └── src
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
     ├── App.js # This is the root of your app. Contains static HTML right now.
+    ├── Book.js # This component will display the book & its details. Also, you can choose its shelf status.
+    ├── BooksGrid.js # This component will display many book components in a grid.
+    ├── HomePage.js # This is the home page that displays shelfs & books from each shelfs.
+    ├── NotFound.js # This page displays an error message in case of entering the wrong path.
+    ├── SearchPage.js # This page is for serching book by name.
+    ├── Shelf.js # a section which display a certain books that has the same shelf status.
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
     ├── icons # Helpful images for your app. Use at your discretion.
@@ -41,6 +47,7 @@ Remember that good React design practice is to create new JS files for each comp
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
 
 - [`getAll`](#getall)
+- [`get`](#get)
 - [`update`](#update)
 - [`search`](#search)
 
@@ -52,6 +59,18 @@ Method Signature:
 getAll();
 ```
 
+- Returns a Promise which resolves to a JSON object containing a collection of book objects.
+- This collection represents the books currently in the bookshelves in your app.
+
+### `get`
+
+Method Signature:
+
+```js
+get(bookId);
+```
+
+- bookId: `<String>` contains the id of certain book
 - Returns a Promise which resolves to a JSON object containing a collection of book objects.
 - This collection represents the books currently in the bookshelves in your app.
 
