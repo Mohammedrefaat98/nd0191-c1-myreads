@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 export default function SearchPage() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState([]);
-  const mounted = useRef();
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -17,19 +16,14 @@ export default function SearchPage() {
   };
   
   useEffect(() => {
+    let mounted = true;
     const search = async () => {
-      await BooksAPI.search(input)
-        .then(res => (Array.isArray(res) ? setResult(res) : setResult([])))
-        .catch(() => setResult([]));
+      input && await BooksAPI.search(input.trim())
+        .then(res => {if(mounted)(Array.isArray(res) ? setResult(res) : setResult([]))})
+        .catch(e => setResult([]));
     };
-    if (!mounted.current) {
-      setResult([]);
-      mounted.current = true;
-    } else {
-      // do componentDidUpdate logic
-      search();
-    }
-    return setResult([]);
+    search();
+    return ()=>mounted=false;
   }, [input]);
 
   return (
@@ -50,7 +44,7 @@ export default function SearchPage() {
         </div>
       </div>
 
-      <BooksGrid booksList={result} />
+      {input && <BooksGrid booksList={result} />}
     </div>
   );
 }

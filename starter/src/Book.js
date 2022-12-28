@@ -4,16 +4,18 @@ import PropTypes from 'prop-types'
 import * as BooksAPI from "./BooksAPI";
 
 export default function Book({id,onUpdate}) {
-  const getByID=async ()=>{
-    await BooksAPI.get(id).then(res=>setBook(res));
-  }
   const handleChange=(e)=>{
     onUpdate({id: id},e.target.value);
     setBook({...book,shelf: e.target.value});
   }
   const [book,setBook]=useState();
   useEffect(()=>{
+    let mounted = true;
+    const getByID=async ()=>{
+      await BooksAPI.get(id).then(res=>{if(mounted) setBook(res)});
+    }
     getByID();
+    return ()=>mounted=false;
   },[]);
 
   return (
